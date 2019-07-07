@@ -35,6 +35,8 @@ packages=(
   "ripgrep"
   "fzf"
   "z"
+  "cowsay"
+  "fortune"
 )
 
 for i in "${packages[@]}"
@@ -47,43 +49,56 @@ echo "---------------------------------------------------------"
 echo "$(tput setaf 2)JARVIS: Installing node$(tput sgr 0)"
 echo "---------------------------------------------------------"
 
-nvm install
+nvm install --lts
 
 echo "---------------------------------------------------------"
-echo "$(tput setaf 2)JARVIS: Installing Python NeoVim client.$(tput sgr 0)"
+echo "$(tput setaf 2)JARVIS: Installing npm packages.$(tput sgr 0)"
 echo "---------------------------------------------------------"
 
-pip3 install neovim
+packages=(
+  "neovim"
+  "gitmoji-cli"
+  "spacheship-prompt"
+  "bash-language-server"
+  "vtop"
+)
+
+for i in "${packages[@]}"
+do
+  npm install -g $i
+  echo "---------------------------------------------------------"
+done
 
 echo "---------------------------------------------------------"
-echo "$(tput setaf 2)JARVIS: Installing node neovim package$(tput sgr 0)"
+echo "$(tput setaf 2)JARVIS: Installing pip packages.$(tput sgr 0)"
 echo "---------------------------------------------------------"
 
-npm install -g neovim
+packages=(
+  "neovim"
+  "vim-lint"
+)
+
+for i in "${packages[@]}"
+do
+  pip3 install $i
+  echo "---------------------------------------------------------"
+done
 
 echo "---------------------------------------------------------"
-echo "$(tput setaf 2)JARVIS: Installing gitmoji-cli package$(tput sgr 0)"
+echo "$(tput setaf 2)JARVIS: Installing gem packages.$(tput sgr 0)"
 echo "---------------------------------------------------------"
 
-npm install -g gitmoji-cli
+packages=(
+  "colorls"
+  "lolcat"
+  "artii"
+)
 
-echo "---------------------------------------------------------"
-echo "$(tput setaf 2)JARVIS: Installing spaceship prompt$(tput sgr 0)"
-echo "---------------------------------------------------------"
-
-npm install -g spaceship-prompt
-
-echo "---------------------------------------------------------"
-echo "$(tput setaf 2)JARVIS: Installing vim linter (vint)$(tput sgr 0)"
-echo "---------------------------------------------------------"
-
-pip3 install vim-vint
-
-echo "---------------------------------------------------------"
-echo "$(tput setaf 2)JARVIS: Installing bash language server$(tput sgr 0)"
-echo "---------------------------------------------------------"
-
-npm i -g bash-language-server
+for i in "${packages[@]}"
+do
+  gem install $i --user-install
+  echo "---------------------------------------------------------"
+done
 
 echo "---------------------------------------------------------"
 echo "$(tput setaf 2)JARVIS: Installing system fonts.$(tput sgr 0)"
@@ -119,11 +134,6 @@ echo "---------------------------------------------------------"
 echo "$(tput setaf 2)JARVIS: Installing zsh-autosuggestions.$(tput sgr 0)"
 echo "---------------------------------------------------------"
 git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
-
-echo "---------------------------------------------------------"
-echo "$(tput setaf 2)JARVIS: Installing vtop.$(tput sgr 0)"
-echo "---------------------------------------------------------"
-npm install -g vtop
 
 echo "---------------------------------------------------------"
 echo "$(tput setaf 2)JARVIS: Installing Neovim plugins and linking dotfiles.$(tput sgr 0)"

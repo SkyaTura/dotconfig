@@ -27,7 +27,22 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git node brew tmux docker)
+plugins=(
+  git
+  node
+  brew
+  tmux
+  docker
+  composer
+  common-aliases
+  kubectl
+  last-working-dir
+  npm
+  osx
+  sudo
+  web-search
+  z
+)
 
 # User configuration
 # Hide user@hostname if it's expected default user
@@ -103,10 +118,6 @@ fgr() {
   fi
 }
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
 # Enabled zsh-autosuggestions
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
@@ -131,3 +142,11 @@ alias v="nvim"
 alias top="vtop --theme=wizard"
 alias l="colorls -lA --sd"
 alias gc="gitmoji -c"
+gac() {
+  ga $@
+  gc
+  gp
+}
+
+export NVM_DIR=~/.nvm
+source $(brew --prefix nvm)/nvm.sh
