@@ -7,7 +7,7 @@ ZSH_THEME="robbyrussell"
 
 # TMUX
 # Automatically start tmux
-#ZSH_TMUX_AUTOSTART=true
+ZSH_TMUX_AUTOSTART=true
 
 # Automatically connect to a previous session if it exists
 ZSH_TMUX_AUTOCONNECT=true
@@ -33,15 +33,9 @@ plugins=(
   brew
   tmux
   docker
-  composer
   common-aliases
-  kubectl
-  last-working-dir
-  npm
-  osx
   sudo
   web-search
-  z
 )
 
 # User configuration
@@ -148,5 +142,15 @@ gac() {
   gp
 }
 
+# Loads NVM and Node
 export NVM_DIR=~/.nvm
 source $(brew --prefix nvm)/nvm.sh
+
+# Load ruby packages
+for D in `find "$HOME/.gem/ruby" -type d -mindepth 1 -maxdepth 1`
+do
+  PATH=$PATH:$D/bin
+done
+
+# Display MotD
+if [[ -e $HOME/.motd ]]; then source $HOME/.motd; fi

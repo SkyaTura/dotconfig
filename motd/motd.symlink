@@ -1,0 +1,4 @@
+#!/bin/sh
+
+artii "SkyaTura" | lolcat
+fortune | cowsay | lolcat
