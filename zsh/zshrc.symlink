@@ -141,10 +141,16 @@ gac() {
   gc
   gp
 }
+tx() {
+  tmuxinator $@
+}
 
 # Loads NVM and Node
 export NVM_DIR=~/.nvm
 source $(brew --prefix nvm)/nvm.sh
+
+# Load latest Ruby version
+export PATH="/usr/local/opt/ruby/bin:$PATH"
 
 # Load ruby packages
 for D in `find "$HOME/.gem/ruby" -type d -mindepth 1 -maxdepth 1`
@@ -152,5 +158,9 @@ do
   PATH=$PATH:$D/bin
 done
 
+# Load tmuxinator completions
+source ~/.gem/ruby/2.6.0/gems/tmuxinator-1.1.1/completion/tmuxinator.zsh
+
 # Display MotD
 if [[ -e $HOME/.motd ]]; then source $HOME/.motd; fi
+

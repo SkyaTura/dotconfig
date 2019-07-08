@@ -37,6 +37,7 @@ packages=(
   "z"
   "cowsay"
   "fortune"
+  "ruby"
 )
 
 for i in "${packages[@]}"
@@ -44,6 +45,12 @@ do
   brew install $i
   echo "---------------------------------------------------------"
 done
+
+echo "---------------------------------------------------------"
+echo "$(tput setaf 2)JARVIS: Link latest version of Ruby$(tput sgr 0)"
+echo "---------------------------------------------------------"
+
+brew link --overwrite ruby
 
 echo "---------------------------------------------------------"
 echo "$(tput setaf 2)JARVIS: Installing node$(tput sgr 0)"
@@ -92,6 +99,7 @@ packages=(
   "colorls"
   "lolcat"
   "artii"
+  "tmuxinator"
 )
 
 for i in "${packages[@]}"
