@@ -43,6 +43,8 @@ packages=(
   "cowsay"
   "fortune"
   "ruby"
+  "asciinema"
+  "azure-cli"
 )
 
 for i in "${packages[@]}"
