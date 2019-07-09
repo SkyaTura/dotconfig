@@ -164,3 +164,25 @@ source ~/.gem/ruby/2.6.0/gems/tmuxinator-1.1.1/completion/tmuxinator.zsh
 # Display MotD
 if [[ -e $HOME/.motd ]]; then source $HOME/.motd; fi
 
+# Azure mounts
+function mount_azure () {
+  accountName=eappsstorageacc1
+  accountPassword='GbVeBlKsusmutCmIzMNu/nmWY9Rakn0PlJIzUJbvrf/b04lDA85s060eSrDIvQakX65gjAvgv1BJB8z2eqXUKg=='
+  fileShare=$1
+  dir="$HOME/cloud/azure/$accountName/$fileShare"
+  if [[ ! -e $dir ]]; then
+    mkdir -p $dir
+  fi
+  sudo mount -t cifs //$accountName.file.core.windows.net/$fileShare $dir -o vers=2.1,serverino,username=$accountName,password=$accountPassword
+}
+
+function mount_azure_ert () {
+  accountName=ertstorage1
+  accountPassword='RF7TXu/9CIq86VLBsk63J8qZocp9GnhuOKr5x8fYRPICdSh6LcM5gGohIOwaNMV6Prk2oNxLpWdDkaMpONZvlg=='
+  fileShare=$1
+  dir="$HOME/cloud/azure/$accountName/$fileShare"
+  if [[ ! -e $dir ]]; then
+    mkdir -p $dir
+  fi
+  sudo mount -t cifs //$accountName.file.core.windows.net/$fileShare $dir -o vers=2.1,serverino,username=$accountName,password=$accountPassword
+}

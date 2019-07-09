@@ -1,7 +1,12 @@
 #!/bin/sh
-echo "---------------------------------------------------------"
-echo "$(tput setaf 2)JARVIS: Greetings. Preparing to power up and begin diagnostics.$(tput sgr 0)"
-echo "---------------------------------------------------------"
+
+log() {
+  echo "---------------------------------------------------------"
+  echo "$(tput setaf 2)JARVIS: $@ $(tput sgr 0)"
+  echo "---------------------------------------------------------"
+}
+
+log Greetings. Preparing to power up and begin diagnostics.
 
 INSTALLDIR=$PWD
 
