@@ -11,11 +11,11 @@ let g:mapleader='\'
 " Disable line numbers
 set nonumber
 
-" Don't show last command
-set noshowcmd
+" Show keys pressed
+set showcmd
 
 " Yank and paste with the system clipboard
-set clipboard=unnamed
+" set clipboard=unnamed
 
 " Hides buffers instead of closing them
 set hidden
@@ -123,6 +123,9 @@ catch
   echo 'Denite not installed. It should work after running :PlugInstall'
 endtry
 
+" === Vim Move === "
+let g:move_key_modifier = 'C'
+
 " === Coc.nvim === "
 " use <tab> for trigger completion and navigate to next complete item
 function! s:check_back_space() abort
@@ -137,6 +140,9 @@ inoremap <silent><expr> <TAB>
 
 "Close preview window when completion is done.
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+
+" Add vue filetype
+autocmd BufReadPost,BufNewFile *.vue setlocal filetype=vue
 
 " === NeoSnippet === "
 " Map <C-k> as shortcut to activate snippet if available
@@ -250,7 +256,7 @@ set termguicolors
 
 " Editor theme
 try
-  colorscheme vibrantink
+  colorscheme default
 catch
   colorscheme slate
 endtry
@@ -336,7 +342,7 @@ endfunction
 "   <leader>g - Search current directory for occurences of given term and
 "   close window if no results
 "   <leader>j - Search current directory for occurences of word under cursor
-nmap ; :Denite buffer -split=floating -winrow=1<CR>
+nmap <leader>; :Denite buffer -split=floating -winrow=1<CR>
 nmap <leader>t :Denite file/rec -split=floating -winrow=1<CR>
 nnoremap <leader>g :<C-u>Denite grep:. -no-empty<CR>
 nnoremap <leader>j :<C-u>DeniteCursorWord grep:.<CR>
@@ -387,15 +393,8 @@ vnoremap <leader>p "_dP
 nmap <Esc><Esc><Esc> :w<CR>
 
 " === Open vim config file === "
-nmap <leader>s :sp ~/.config/nvim/init.vim<CR>
-
-" === Easy move lines === "
-nnoremap <C-j> :m .+1<CR>==
-nnoremap <C-k> :m .-2<CR>==
-inoremap <C-j> <Esc>:m .+1<CR>==gi
-inoremap <C-k> <Esc>:m .-2<CR>==gi
-vnoremap <C-j> :m '>+1<CR>gv=gv
-vnoremap <C-k> :m '<-2<CR>gv=gv
+nmap <leader>ss :sp ~/.config/nvim/init.vim<CR>
+nmap <leader>sp :sp ~/.config/nvim/plugins.vim<CR>
 
 " === Change TMUX Navigator keymapping === "
 let g:tmux_navigator_no_mappings = 1

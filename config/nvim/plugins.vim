@@ -21,6 +21,16 @@ endif
 call plug#begin('~/.config/nvim/plugged')
 
 " === Editing Plugins === "
+
+" quoting/parenthesizing made simple
+Plug 'tpope/vim-surround'
+
+" EditorConfig plugin for Vim
+Plug 'editorconfig/editorconfig-vim'
+
+" Plugin to move lines and selections up and down
+Plug 'matze/vim-move'
+
 " Trailing whitespace highlighting & automatic fixing
 Plug 'ntpeters/vim-better-whitespace'
 
@@ -68,9 +78,14 @@ Plug 'chr4/nginx.vim'
 
 " Syntax highlighting for javascript libraries
 Plug 'othree/javascript-libraries-syntax.vim'
+Plug 'digitaltoad/vim-pug'
+Plug 'posva/vim-vue'
+Plug 'ap/vim-css-color'
 
 " Improved syntax highlighting and indentation
 Plug 'othree/yajs.vim'
+Plug 'sheerun/vim-polyglot'
+Plug 'ekalinin/Dockerfile.vim'
 
 " === UI === "
 " File explorer
@@ -86,6 +101,9 @@ Plug 'vim-airline/vim-airline-themes'
 " Icons
 Plug 'ryanoasis/vim-devicons'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+
+"The undo history visualizer for VIM
+Plug 'mbbill/undotree'
 
 " Initialize plugin system
 call plug#end()

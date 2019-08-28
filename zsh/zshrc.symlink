@@ -186,3 +186,6 @@ function mount_azure_ert () {
   fi
   sudo mount -t cifs //$accountName.file.core.windows.net/$fileShare $dir -o vers=2.1,serverino,username=$accountName,password=$accountPassword
 }
+
+# Load custom Scripts
+export PATH="$HOME/.local/bin:$PATH"
