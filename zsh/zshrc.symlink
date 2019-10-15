@@ -189,3 +189,5 @@ function mount_azure_ert () {
 
 # Load custom Scripts
 export PATH="$HOME/.local/bin:$PATH"
+
+source .iterm2_shell_integration.zsh

@@ -2,6 +2,19 @@ scriptencoding utf-8
 source ~/.config/nvim/plugins.vim
 
 " ============================================================================ "
+" ===                        PERFORMANCE OPTIONS                           === "
+" ============================================================================ "
+
+" disable auto matching parens
+let g:loaded_matchparen=1
+" don't render special chars (tabs, trails, ...)
+set nolist
+" lazy drawing
+set lazyredraw
+set ttyfast
+
+
+" ============================================================================ "
 " ===                           EDITING OPTIONS                            === "
 " ============================================================================ "
 
@@ -18,7 +31,7 @@ set showcmd
 " set clipboard=unnamed
 
 " Hides buffers instead of closing them
-set hidden
+" set hidden
 
 " === TAB/Space settings === "
 " Insert spaces when TAB is pressed.
@@ -32,6 +45,9 @@ set shiftwidth=2
 
 " do not wrap long lines by default
 set nowrap
+
+" set scroll offset
+set scrolloff=10
 
 " Don't highlight current cursor line
 set nocursorline
@@ -137,6 +153,10 @@ inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
+" Vetur
+let g:LanguageClient_serverCommands = {
+  \ 'vue': ['vls']
+  \ }
 
 "Close preview window when completion is done.
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
@@ -252,7 +272,11 @@ let g:signify_sign_delete = '-'
 " ============================================================================ "
 
 " Enable true color support
-set termguicolors
+" if exists('+termguicolors')
+"   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+"   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+"   set termguicolors
+" endif
 
 " Editor theme
 try
@@ -355,8 +379,8 @@ nmap <leader>f :NERDTreeFind<CR>
 
 "   <Space> - PageDown
 "   -       - PageUp
-noremap <Space> <PageDown>
-noremap - <PageUp>
+" noremap <Space> <PageDown>
+" noremap - <PageUp>
 
 " === coc.nvim === "
 nmap <silent> <leader>dd <Plug>(coc-definition)
@@ -390,11 +414,12 @@ nmap <leader>z :JsDoc<CR>
 vnoremap <leader>p "_dP
 
 " === Save files with escape button === "
-nmap <Esc><Esc><Esc> :w<CR>
+nnoremap <Esc><Esc><Esc> :w<CR>
 
 " === Open vim config file === "
 nmap <leader>ss :sp ~/.config/nvim/init.vim<CR>
 nmap <leader>sp :sp ~/.config/nvim/plugins.vim<CR>
+nmap <leader>sc :sp ~/.config/nvim/coc-settings.json<CR>
 
 " === Change TMUX Navigator keymapping === "
 let g:tmux_navigator_no_mappings = 1
@@ -434,13 +459,14 @@ set smartcase
 set autoread
 
 " Smart line numbers
-:set number relativenumber
+:set number norelativenumber
+" :set number relativenumber
 
-:augroup numbertoggle
-:  autocmd!
-:  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-:  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
-:augroup END
+" :augroup numbertoggle
+" :  autocmd!
+" :  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+" :  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+" :augroup END
 
 " Set backups
 if has('persistent_undo')
