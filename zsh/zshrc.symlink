@@ -191,3 +191,4 @@ function mount_azure_ert () {
 export PATH="$HOME/.local/bin:$PATH"
 
 source .iterm2_shell_integration.zsh
+export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
