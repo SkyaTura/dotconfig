@@ -1,6 +1,8 @@
 # Path to oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
 
+source ~/.antigen.zsh
+
 # Name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 ZSH_THEME="robbyrussell"
@@ -11,6 +13,7 @@ ZSH_TMUX_AUTOSTART=true
 
 # Automatically connect to a previous session if it exists
 ZSH_TMUX_AUTOCONNECT=true
+ZSH_TMUX_UNICODE=true
 
 # Enable command auto-correction.
 ENABLE_CORRECTION="true"
@@ -37,6 +40,12 @@ plugins=(
   sudo
   web-search
 )
+
+antigen bundle zuxfoucault/colored-man-pages_mod
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle zpm-zsh/colorize
+
+antigen apply
 
 # User configuration
 # Hide user@hostname if it's expected default user
@@ -131,8 +140,18 @@ SPACESHIP_NODE_SHOW=false
 SPACESHIP_GIT_STATUS_STASHED=''
 
 # Aliases
+export IDF_PATH=/Users/skyatura/esp/esp-idf-v4.0
+alias get_idf='. $HOME/esp/esp-idf-v4.0/export.sh'
 alias vim="nvim"
 alias v="nvim"
+alias ni="npm install"
+alias nis="npm install --save"
+alias nid="npm install --save-dev"
+alias nig="npm install -g"
+alias nrd="npm run dev"
+alias nrb="npm run build"
+alias nrs="npm start"
+alias nrt="npm run test"
 alias top="vtop --theme=wizard"
 alias l="colorls -lA --sd"
 alias gc="gitmoji -c"
@@ -144,10 +163,42 @@ gac() {
 tx() {
   tmuxinator $@
 }
+grepf() {
+  grep -R "$@" .
+}
+function chpwd() {
+    emulate -L zsh
+    l -C
+}
+
+function tm-jbs() {
+  tmux has-session -t JBS
+  if [ $? != 0 ]
+  then
+    tmux new-session -s JBS -n API -c /Users/skyatura/projects/emiolo/jbs/api -d
+    tmux new-window -t JBS -n App -c /Users/skyatura/projects/emiolo/jbs/app
+    tmux new-window -t JBS -n Admin -c /Users/skyatura/projects/emiolo/jbs/admin
+  fi
+  tmux switch-client -t JBS
+}
+
+function tm-libbs() {
+  tmux has-session -t Libbs
+  if [ $? != 0 ]
+  then
+    tmux new-session -s Libbs -n API -d  -c /Users/skyatura/projects/emiolo/libbs/api
+    tmux new-window  -t Libbs -n App     -c /Users/skyatura/projects/emiolo/libbs/app
+    tmux new-window  -t Libbs -n Common  -c /Users/skyatura/projects/emiolo/libbs/common
+    tmux new-window  -t Libbs -n Project -c /Users/skyatura/projects/emiolo/libbs
+  fi
+  tmux switch-client -t Libbs
+}
 
 # Loads NVM and Node
 export NVM_DIR=~/.nvm
-source $(brew --prefix nvm)/nvm.sh
+export NODE_VERSION="v10.16.3"
+export PATH="$HOME/.nvm/versions/node/$NODE_VERSION/bin:$PATH"
+#source $(brew --prefix nvm)/nvm.sh
 
 # Load latest Ruby version
 export PATH="/usr/local/opt/ruby/bin:$PATH"
@@ -187,8 +238,25 @@ function mount_azure_ert () {
   sudo mount -t cifs //$accountName.file.core.windows.net/$fileShare $dir -o vers=2.1,serverino,username=$accountName,password=$accountPassword
 }
 
+function c () {
+  cd $1
+  l
+}
+
 # Load custom Scripts
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/bin:$PATH"
+export PATH="/Users/skyatura/projects/SkyaTura/custom-chrome/depot_tools:$PATH"
 
-source .iterm2_shell_integration.zsh
+source $HOME/.iterm2_shell_integration.zsh
 export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
+fpath+=${ZDOTDIR:-~}/.zsh_functions
+
+export LANG="pt_BR.UTF-8"
+export LC_COLLATE="pt_BR.UTF-8"
+export LC_CTYPE="pt_BR.UTF-8"
+export LC_MESSAGES="pt_BR.UTF-8"
+export LC_MONETARY="pt_BR.UTF-8"
+export LC_NUMERIC="pt_BR.UTF-8"
+export LC_TIME="pt_BR.UTF-8"
+export LC_ALL="pt_BR.UTF-8"

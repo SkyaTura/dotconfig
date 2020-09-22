@@ -1,0 +1,330 @@
+#browser {
+  --activation-area-header: 10px;
+  --activation-area-panels: 0px;
+  --activation-area-tabs: 0px;
+
+  /*
+  --speed-blink: .0s;
+  --speed-faster: .1s;
+  --speed-fast: .2s;
+  --speed-normal: .3s;
+  --speed-slow: .5s;
+  */
+
+  --speed-multiplier: .2;
+  --speed-blink: calc(var(--speed-multiplier) * 0.0s);
+  --speed-faster: calc(var(--speed-multiplier) * 0.1s);
+  --speed-fast: calc(var(--speed-multiplier) * 0.2s);
+  --speed-normal: calc(var(--speed-multiplier) * 0.3s);
+  --speed-slow: calc(var(--speed-multiplier) * 0.5s);
+}
+
+#panels-container {
+  --transition-duration: var(--speed-fast);
+  --transition-delay: var(--speed-blink);
+  --transition-function: ease;
+  position: absolute !important;
+  box-sizing: content-box !important;
+  transition:
+    width var(--transition-duration) var(--transition-delay) var(--transition-function),
+    transform var(--transition-duration) var(--transition-delay) var(--transition-function) !important;
+  z-index: 999 !important;
+  height: 100%;
+  border: none !important;
+  display: flex !important;
+  will-change: width;
+}
+
+#panels-container.switcher,
+#browser.isblurred #panels-container {
+  display: none !important;
+}
+
+#panels-container .switch {
+  visibility: visible !important;
+}
+
+#panels-container:not(:hover):not(:active):not(:focus-within):not(:focus) {
+  --transition-duration: var(--speed-blink);
+  transform: translate(-34px) !important;
+  width: 34px !important;
+  transition:
+    width var(--transition-duration) var(--transition-delay) var(--transition-function),
+    transform var(--transition-duration) var(--transition-delay) var(--transition-function) !important;
+}
+
+#panels-container:not(:hover):not(:active):not(:focus-within):not(:focus) * {
+  visibility: hidden !important;
+}
+
+#panels-container .panel-group {
+  transform: scaleX(0);
+  opacity: 0;
+  visibility: hidden;
+  transform-origin: 0 50%;
+  transition:
+    width var(--transition-duration) var(--transition-delay) var(--transition-function),
+    visibility var(--transition-duration) var(--transition-delay) var(--transition-function),
+    opacity var(--transition-duration) var(--transition-delay) var(--transition-function),
+    transform var(--transition-duration) var(--transition-delay) var(--transition-function) !important;
+}
+
+#panels-container:focus .panel-group,
+#panels-container:active .panel-group,
+#panels-container:focus-within .panel-group,
+#panels-container:hover .panel-group {
+  visibility: visible;
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+div#panels-container::before {
+  content: '' !important;
+  position: absolute !important;
+  width: 100% !important;
+  height: 100% !important;
+  top: 0 !important;
+  left: 0 !important;
+  margin-left: var(--activation-area-panels) !important;
+}
+
+#tabs-container {
+  position: absolute !important;
+  background: rgba(0,0,0, .6) !important;
+  transition: all var(--speed-fast) ease 0s;
+}
+
+#tabs-container.right:not(:hover) {
+  opacity: 0;
+}
+/* Bottom Tab Bar */
+#tabs-container.bottom {
+  bottom: 34px !important;
+  width: 100% !important;
+  transform: translateY(100%);
+}
+
+#tabs-container.bottom:hover, .UrlBar:hover ~ #tabs-container.bottom {
+  transform: translateY(0);
+  transition: all var(--speed-normal) ease 0s;
+}
+
+/* Bottom Tab Right */
+#tabs-container.right {
+  bottom: 34px !important;
+  height: 100% !important;
+  top: 0;
+  right: 0;
+  transform: translateX(100%);
+}
+
+#tabs-container.right:hover {
+  transform: translateY(0);
+  transition: all var(--speed-normal) ease 0s;
+}
+
+#tabs-container::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  margin-left: calc(var(--activation-area-tabs));
+  transform: translateX(calc(-1 * var(--activation-area-tabs)));
+}
+
+/* Custom Tabs */
+.tab.marked.active {
+  background: #666 !important;
+}
+
+.tab-position .close {
+  display: flex !important;
+}
+
+.tab-position:not(:hover) button.close {
+  visibility: hidden !important;
+  position: absolute !important;
+}
+
+#vivaldi-tooltip .tab-solo {
+  position: absolute !important;
+  width: calc(100% + 15vw);
+  height: calc(100% + 10vw);
+  /* transform: translateX(calc(10vw / -2)); */
+}
+
+#vivaldi-tooltip .tab-solo .tooltip-item {
+  width: 100%;
+  height: 100%;
+}
+
+
+#vivaldi-tooltip .tab-solo .thumbnail-image {
+  width: 100%;
+  height: 100%;
+  max-height: 100% !important;
+}
+
+#header {
+  position: absolute;
+  transition: transform var(--speed-normal) ease 0s;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  box-sizing: border-box;
+  transform: translateY(-100%);
+}
+
+#browser.hasFocus:not(:hover) #header, #header:hover {
+  transform: translateY(0);
+}
+
+#header::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  margin-top: var(--activation-area-header);
+}
+
+.UrlBar {
+  position: absolute;
+  transition: transform var(--speed-normal) ease 0s;
+  transform: translateY(100%);
+  width: 100%;
+  bottom: 0;
+  left: 0;
+}
+
+.UrlBar:hover, .UrlBar:focus-within, #browser:hover #header:not(:hover) ~ #main:not(:hover) .UrlBar {
+  transform: translateY(0);
+}
+
+#browser > .toolbar .button-toolbar > button:disabled > .button-title {
+  color: inherit !important;
+}
+
+#browser > .toolbar {
+  background: black;
+  /* color: rgba(0,255,0,.4); */
+  color: rgba(255,255,255,.3);
+  will-change: color;
+  transition: color var(--speed-normal);
+}
+
+.ClockButton, #browser.hasFocus:not(:hover) > .toolbar, #browser > .toolbar:hover {
+  color: rgba(0,255,0,1);
+}
+
+/* Round Tabs */
+#tabs-container {
+  background: rgba(0,0,0,.8);
+  top: 0 !important;
+  height: calc(100vh - 22px) !important;
+  width: 15vw !important;
+  min-width: 290px !important;
+  max-width: 500px !important;
+  will-change: height;
+  padding: 0 8px;
+}
+.UrlBar:hover ~ .inner #tabs-container,
+.UrlBar:focus-within ~ .inner #tabs-container,
+#browser:hover #header:not(:hover) ~ #main:not(:hover) .UrlBar  ~ .inner #tabs-container {
+  height: calc(100vh - 56px) !important;
+}
+#tabs-container .resize {
+  overflow: unset !important;
+}
+#tabs-container .tab-strip {
+  display: flex;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+#tabs-container.right .tab-strip {
+  flex-flow: column-reverse;
+  padding-bottom: 32px;
+  justify-content: flex-start;
+}
+#tabs-container .tab-strip > span {
+  flex: 0 1 250px;
+  display: flex;
+  flex-direction: column;
+}
+#tabs-container .tab-strip > .toolbar-tabbar {
+  flex: 0 1;
+  justify-content: center;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  justify-content: center;
+}
+#tabs-container .tab-position {
+  flex: 1 1 0;
+}
+#tabs-container .tab {
+  background: black;
+  border: 1px solid rgba(255,255,255,.5);
+  border-radius: 10px;
+}
+#tabs-container .tab.unread {
+  box-shadow: red 0 0 15px 3px;
+}
+#tabs-container .tab.active {
+  box-shadow: lime 0 0 15px 0px;
+  margin: 10px 0;
+}
+#tabs-container .tab-position, #tabs-container .button-toolbar {
+  position: relative !important;
+  width: auto !important;
+  height: auto !important;
+  top: unset !important;
+  bottom: unset !important;
+  right: unset !important;
+  left: unset !important;
+  transform: unset !important;
+}
+#tabs-container .thumbnail-image {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+#tabs-container .thumbnail-image > * {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.toolbar-mainbar .extension-popup.bottom {
+  top: unset !important;
+  bottom: 48px;
+}
+
+/*
+.toolbar-statusbar {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  transition: transform .2s;
+}
+.toolbar-statusbar:not(:hover):not(:focus-within) {
+  transform: translateY(100%)
+}
+ * {
+   transition: var(--speed-blink) !important;
+ }
+*/
+
+#webview-container .startpage {
+  background-image: url(https://source.unsplash.com/3840x2160/?featured) !important;
+}
+
+#webview-container .startpage-navigation,
+#webview-container .startpage-content {
+  display: none;
+}

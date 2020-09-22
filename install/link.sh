@@ -41,3 +41,23 @@ for config in $INSTALLDIR/config/*; do
     ln -s $config $target
   fi
 done
+
+echo "---------------------------------------------------------"
+echo "$(tput setaf 2)JARVIS: Installing binary files.$(tput sgr 0)"
+echo "---------------------------------------------------------"
+
+mkdir -p $HOME/bin
+
+for file in $INSTALLDIR/bin/*; do
+  target=$HOME/bin/$( basename $file )
+  if [ -e $target ]; then
+    echo "---------------------------------------------------------"
+    echo "$(tput setaf 3)JARVIS: ~${target#$HOME} already exists... Skipping.$(tput sgr 0)"
+    echo "---------------------------------------------------------"
+  else
+    echo "---------------------------------------------------------"
+    echo "$(tput setaf 2)JARVIS: Creating symlink for ${file}.$(tput sgr 0)"
+    echo "---------------------------------------------------------"
+    ln -s $file $target
+  fi
+done

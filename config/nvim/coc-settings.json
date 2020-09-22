@@ -1,11 +1,54 @@
 {
   "suggest.echodocSupport": true,
-  "suggest.maxCompleteItemCount": 20,
-  "coc.preferences.formatOnSaveFiletypes": ["javascript", "typescript", "typescriptreact", "json", "javascriptreact"],
-  "eslint.filetypes": ["javascript", "typescript", "typescriptreact", "javascriptreact", "vue"],
+  "suggest.maxCompleteItemCount": 50,
+  "coc.preferences.formatOnSaveFiletypes": [
+    "javascript",
+    "typescript",
+    "typescriptreact",
+    "json",
+    "javascriptreact"
+  ],
+  "eslint.filetypes": [
+    "javascript",
+    "typescript",
+    "typescriptreact",
+    "javascriptreact",
+    "vue"
+  ],
   "eslint.autoFixOnSave": true,
   "diagnostic.errorSign": "•",
   "diagnostic.warningSign": "•",
-  "diagnostic.infoSign": "•"
+  "diagnostic.infoSign": "•",
+  "suggest.invalidInsertCharacters": [],
+  "suggest.enablePreview": true,
+  "vetur.completion.autoImport": true,
+  "snippets.shortcut": "SN",
+  "snippets.autoTrigger": true,
+  "coc.source.word.priority": 0,
+  "coc.source.emoji.filetypes": [
+    "javascript",
+    "vue",
+    "markdown"
+  ],
+  "cSpellExt.enableDictionaries": [
+    "portuguese-brazilian"
+  ],
+  "cSpell.language": "en,pt_BR",
+  "cSpell.userWords": [
+    "Emiolo",
+    "ROLLBAR",
+    "Teemo",
+    "coachee",
+    "componentização",
+    "groupable",
+    "libbs",
+    "nuxt",
+    "permissionamento",
+    "thalamusjs",
+    "vuetify"
+  ],
+  "yaml.schemas": {
+    "https://json.schemastore.org/gitlab-ci": "/.gitlab-ci.yml"
+  },
+  "prettier.tabWidth": 2
 }
-

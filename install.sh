@@ -90,6 +90,7 @@ echo "---------------------------------------------------------"
 packages=(
   "neovim"
   "vim-lint"
+  "powerline-status"
 )
 
 for i in "${packages[@]}"

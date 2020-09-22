@@ -1,4 +1,15 @@
 #!/bin/sh
 
-artii "SkyaTura" | lolcat
-fortune | cowsay | lolcat
+# * Calculate usage
+usage=$(df -h | grep " /$" | cut -f4 | awk '{printf "%3.1f/%sB (%s)", $3, $2, $5}')
+SkyaTura=$(artii SkyaTura)
+fortune=$(fortune | cowsay)
+
+stats="
+
+  Disk Usage....: $usage
+
+"
+
+
+echo "$SkyaTura\n\n$stats\n$fortune" | lolcat

@@ -21,6 +21,9 @@ endif
 call plug#begin('~/.config/nvim/plugged')
 
 " === Editing Plugins === "
+Plug 'tc50cal/vim-terminal'
+Plug 'wincent/terminus'
+
 
 " quoting/parenthesizing made simple
 Plug 'tpope/vim-surround'
@@ -30,6 +33,12 @@ Plug 'editorconfig/editorconfig-vim'
 
 " Plugin to move lines and selections up and down
 Plug 'matze/vim-move'
+Plug 'justinmk/vim-sneak'
+Plug 'leafoftree/vim-blink'
+Plug 't9md/vim-choosewin'
+Plug 'romgrk/winteract.vim'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'Yggdroot/LeaderF'
 
 " Trailing whitespace highlighting & automatic fixing
 Plug 'ntpeters/vim-better-whitespace'
@@ -42,16 +51,24 @@ Plug 'easymotion/vim-easymotion'
 
 " Intellisense Engine
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+Plug 'honza/vim-snippets'
+Plug 'ternjs/tern_for_vim', { 'for': 'javascript' }
+" Plug 'zxqfl/tabnine-vim'
+" Plug 'ycm-core/YouCompleteMe'
+Plug 'preservim/nerdcommenter'
 
 " Tmux/Neovim movement integration
 Plug 'christoomey/vim-tmux-navigator'
 
+" Vim plugin for .tmux.conf
+Plug 'tmux-plugins/vim-tmux'
+
 " Denite - Fuzzy finding, buffer management
-Plug 'Shougo/denite.nvim', { 'commit': '29bfd4c53271c7a150def2388e059746ae4c1713' }
+" Plug 'Shougo/denite.nvim', { 'commit': '29bfd4c53271c7a150def2388e059746ae4c1713' }
 
 " Snippet support
-Plug 'Shougo/neosnippet'
-Plug 'Shougo/neosnippet-snippets'
+" Plug 'Shougo/neosnippet'
+" Plug 'Shougo/neosnippet-snippets'
 
 " Print function signatures in echo area
 Plug 'Shougo/echodoc.vim'
@@ -60,6 +77,7 @@ Plug 'Shougo/echodoc.vim'
 " Enable git changes to be shown in sign column
 Plug 'mhinz/vim-signify'
 Plug 'tpope/vim-fugitive'
+Plug 'tomhoule/gitmoji-selector'
 
 " === Javascript Plugins === "
 " Typescript syntax highlighting
@@ -74,13 +92,15 @@ Plug 'heavenshell/vim-jsdoc'
 " === Syntax Highlighting === "
 
 " Syntax highlighting for nginx
-Plug 'chr4/nginx.vim'
+" Plug 'chr4/nginx.vim'
 
 " Syntax highlighting for javascript libraries
 Plug 'othree/javascript-libraries-syntax.vim'
-Plug 'digitaltoad/vim-pug'
-Plug 'posva/vim-vue'
-Plug 'ap/vim-css-color'
+" Plug 'digitaltoad/vim-pug'
+" Plug 'posva/vim-vue'
+Plug 'leafOfTree/vim-vue-plugin'
+" Plug 'ap/vim-css-color'
+" Plug 'Quramy/tsuquyomi-vue'
 
 " Improved syntax highlighting and indentation
 Plug 'othree/yajs.vim'
@@ -97,6 +117,7 @@ Plug 'mhartington/oceanic-next'
 " Customized vim status line
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'edkolev/tmuxline.vim'
 
 " Icons
 Plug 'ryanoasis/vim-devicons'

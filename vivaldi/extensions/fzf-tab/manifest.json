@@ -1,0 +1,15 @@
+{
+  "manifest_version": 2,
+  "version": "0.0.1",
+  "name": "FZF Quick Commands",
+  "background": {
+    "scripts": [
+      "fuse.js",
+      "background.js"
+    ],
+    "persistent": true,
+    "permissions": [
+      "tabs"
+    ]
+  }
+}

@@ -69,6 +69,10 @@ set shortmess+=c
 " ===                           PLUGIN SETUP                               === "
 " ============================================================================ "
 
+" enhance YCM JS completion with tern's smarts
+autocmd FileType javascript setlocal omnifunc=tern#Complete
+set completeopt-=preview
+
 " Wrap in try/catch to avoid errors on initial install before plugin is available
 try
 " === Denite setup ==="
@@ -143,20 +147,38 @@ endtry
 let g:move_key_modifier = 'C'
 
 " === Coc.nvim === "
-" use <tab> for trigger completion and navigate to next complete item
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <C-a> pumvisible() ? "\<C-y>" : "\<C-a>"
+" inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
+" use <tab> for trigger completion and navigate to next complete item
+" function! s:check_back_space() abort
+"   let col = col('.') - 1
+"   return !col || getline('.')[col - 1]  =~ '\s'
+" endfunction
+
+" inoremap <silent><expr> <TAB>
+"       \ pumvisible() ? "\<C-n>" :
+"       \ <SID>check_back_space() ? "\<TAB>" :
+"       \ coc#refresh()
+
 " Vetur
 let g:LanguageClient_serverCommands = {
   \ 'vue': ['vls']
   \ }
+
+" Vim Vue Plugin
+let g:vim_vue_plugin_use_typescript = 1
+let g:vim_vue_plugin_use_pug = 1
+let g:vim_vue_plugin_use_sass = 1
+let g:vim_vue_plugin_highlight_vue_attr = 1
+let g:vim_vue_plugin_highlight_vue_keyword = 1
+let g:vim_vue_plugin_use_foldexpr = 1
+let g:vue_pre_processors = []
+nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
+vnoremap <Space> zf
 
 "Close preview window when completion is done.
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
@@ -166,15 +188,26 @@ autocmd BufReadPost,BufNewFile *.vue setlocal filetype=vue
 
 " === NeoSnippet === "
 " Map <C-k> as shortcut to activate snippet if available
-imap <C-k> <Plug>(neosnippet_expand_or_jump)
-smap <C-k> <Plug>(neosnippet_expand_or_jump)
-xmap <C-k> <Plug>(neosnippet_expand_target)
+" imap <C-k> <Plug>(neosnippet_expand_or_jump)
+" smap <C-k> <Plug>(neosnippet_expand_or_jump)
+" xmap <C-k> <Plug>(neosnippet_expand_target)
 
 " Load custom snippets from snippets folder
-let g:neosnippet#snippets_directory='~/.config/nvim/snippets'
+" let g:neosnippet#snippets_directory='~/.config/nvim/snippets'
 
 " Hide conceal markers
-let g:neosnippet#enable_conceal_markers = 0
+" let g:neosnippet#enable_conceal_markers = 0
+
+" === NERDCommenter === "
+let g:NERDCreateDefaultMappings = 0
+let g:NERDSpaceDelims = 1
+let g:NERDTrimTrailingWhitespace = 1
+nnoremap <silent> <leader>ccc :call NERDComment("n", "Toggle")<cr>
+vnoremap <silent> <leader>ccc :call NERDComment("nx", "Toggle")<cr>
+nnoremap <silent> <leader>ccd :call NERDComment("n", "Toggle")<cr>
+vnoremap <silent> <leader>ccd :call NERDComment("nx", "Toggle")<cr>
+nnoremap <silent> <leader>ccs :call NERDComment("n", "Sexy")<cr>
+vnoremap <silent> <leader>ccs :call NERDComment("nx", "Sexy")<cr>
 
 " === NERDTree === "
 " Show hidden files/directories
@@ -375,7 +408,7 @@ nnoremap <leader>j :<C-u>DeniteCursorWord grep:.<CR>
 "  <leader>n - Toggle NERDTree on/off
 "  <leader>f - Opens current file location in NERDTree
 nmap <leader>n :NERDTreeToggle<CR>
-nmap <leader>f :NERDTreeFind<CR>
+" nmap <leader>f :NERDTreeFind<CR>
 
 "   <Space> - PageDown
 "   -       - PageUp
@@ -383,9 +416,18 @@ nmap <leader>f :NERDTreeFind<CR>
 " noremap - <PageUp>
 
 " === coc.nvim === "
-nmap <silent> <leader>dd <Plug>(coc-definition)
-nmap <silent> <leader>dr <Plug>(coc-references)
-nmap <silent> <leader>dj <Plug>(coc-implementation)
+nmap <silent> <leader>ca :CocAction<CR>
+vmap <silent> <leader>ca :'<,'>CocAction<CR>
+vmap <silent> <leader>cs <Plug>(coc-codeaction-selected)
+nmap <silent> <leader>cs <Plug>(coc-codeaction-selected)
+nmap <silent> <leader>cg <Plug>(coc-diagnostics)
+nmap <silent> <leader>cd <Plug>(coc-definition)
+nmap <silent> <leader>ct <Plug>(coc-type-definition)
+nmap <silent> <leader>cr <Plug>(coc-references)
+nmap <silent> <leader>ci <Plug>(coc-implementation)
+nmap <silent> <leader>cll :CocList<CR>
+nmap <silent> <leader>clg :CocList diagnostics<CR>
+nmap <silent> <leader>cg :CocDiagnostics<CR>
 
 " === vim-better-whitespace === "
 "   <leader>y - Automatically remove trailing whitespace
@@ -415,11 +457,18 @@ vnoremap <leader>p "_dP
 
 " === Save files with escape button === "
 nnoremap <Esc><Esc><Esc> :w<CR>
+nnoremap <leader><leader><leader> :w<CR>
+nnoremap <leader>] :q<CR>
+nnoremap <leader>q :q<CR>
 
 " === Open vim config file === "
 nmap <leader>ss :sp ~/.config/nvim/init.vim<CR>
 nmap <leader>sp :sp ~/.config/nvim/plugins.vim<CR>
 nmap <leader>sc :sp ~/.config/nvim/coc-settings.json<CR>
+
+" === Run gitmoji === "
+nmap <leader>gc :TerminalSplit gitmoji -c<CR>
+nmap <leader>ga :TerminalSplit gitmoji -c --amend<CR>
 
 " === Change TMUX Navigator keymapping === "
 let g:tmux_navigator_no_mappings = 1
@@ -444,6 +493,17 @@ nnoremap <silent> <A-Right> :TmuxNavigateRight<cr>
 " ============================================================================ "
 " ===                                 MISC.                                === "
 " ============================================================================ "
+
+" Clipboard helpers
+noremap <Leader>y "*y
+noremap <Leader>p "*p
+noremap <Leader>Y "+y
+noremap <Leader>P "+p
+if has("gui_vimr")
+  nnoremap <silent><D-c> "*y
+endif
+
+noremap <C-RightMouse> :GoReferrers<CR>
 
 " Automaticaly close nvim if NERDTree is only thing left open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
@@ -485,3 +545,25 @@ endif
 
 " Force dark background
 set background=dark
+
+" CtrlP settings
+set wildignore+=node_modules,.git,*/tmp/*,*.so,*.swp,*.zip,*.exe,.thalamus,.nuxt,dist
+let g:ctrlp_working_path_mode = 'car'
+let g:ctrlp_cmd = 'CtrlPMixed'
+
+" LeaderF settings
+let g:Lf_WindowPosition = 'popup'
+let g:Lf_CommandMap = {'<C-K>': ['<Up>'], '<C-J>': ['<Down>']}
+let g:Lf_ShortcutF = "<leader>ff"
+noremap <leader>fb :<C-U><C-R>=printf("Leaderf buffer %s", "")<CR><CR>
+noremap <leader>fm :<C-U><C-R>=printf("Leaderf mru %s", "")<CR><CR>
+noremap <leader>ft :<C-U><C-R>=printf("Leaderf bufTag %s", "")<CR><CR>
+noremap <leader>fl :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
+noremap <leader>fp :<C-U><C-R>=printf("Leaderf function %s", "")<CR><CR>
+noremap <leader>fc :<C-U><C-R>=printf("Leaderf command %s", "")<CR><CR>
+noremap <leader>fh :<C-U><C-R>=printf("Leaderf help %s", "")<CR><CR>
+noremap <leader>fr :<C-U><C-R>=printf("Leaderf rg %s", "")<CR><CR>
+
+" Vim Choosewin
+nmap  -  <Plug>(choosewin)
+let g:choosewin_overlay_enable = 1
