@@ -23,6 +23,7 @@ call plug#begin('~/.config/nvim/plugged')
 " === Editing Plugins === "
 Plug 'tc50cal/vim-terminal'
 Plug 'wincent/terminus'
+" Plug 'jooize/vim-colemak'
 
 
 " quoting/parenthesizing made simple

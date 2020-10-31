@@ -75,6 +75,9 @@ packages=(
   "spacheship-prompt"
   "bash-language-server"
   "vtop"
+  "yarn"
+  "public-ip-cli"
+  "speed-test"
 )
 
 for i in "${packages[@]}"

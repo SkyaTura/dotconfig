@@ -6,6 +6,8 @@
     "typescript",
     "typescriptreact",
     "json",
+    "vue",
+    "php",
     "javascriptreact"
   ],
   "eslint.filetypes": [
@@ -13,7 +15,8 @@
     "typescript",
     "typescriptreact",
     "javascriptreact",
-    "vue"
+    "vue",
+    "php"
   ],
   "eslint.autoFixOnSave": true,
   "diagnostic.errorSign": "•",
@@ -31,9 +34,10 @@
     "markdown"
   ],
   "cSpellExt.enableDictionaries": [
-    "portuguese-brazilian"
+    "portuguese-brazilian",
+    "spanish"
   ],
-  "cSpell.language": "en,pt_BR",
+  "cSpell.language": "en,pt_BR,es",
   "cSpell.userWords": [
     "Emiolo",
     "ROLLBAR",
@@ -41,10 +45,12 @@
     "coachee",
     "componentização",
     "groupable",
+    "itunes",
     "libbs",
     "nuxt",
     "permissionamento",
     "thalamusjs",
+    "upsert",
     "vuetify"
   ],
   "yaml.schemas": {
