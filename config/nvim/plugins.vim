@@ -53,6 +53,7 @@ Plug 'easymotion/vim-easymotion'
 " Intellisense Engine
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 Plug 'honza/vim-snippets'
+Plug 'pantharshit00/vim-prisma'
 Plug 'ternjs/tern_for_vim', { 'for': 'javascript' }
 " Plug 'zxqfl/tabnine-vim'
 " Plug 'ycm-core/YouCompleteMe'

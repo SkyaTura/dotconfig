@@ -156,9 +156,9 @@ alias top="vtop --theme=wizard"
 alias l="colorls -lA --sd"
 alias gc="gitmoji -c"
 gac() {
-  ga $@
-  gc
-  gp
+  git add $@
+  gitmoji -c
+  git push
 }
 tx() {
   tmuxinator $@
@@ -168,7 +168,7 @@ grepf() {
 }
 function chpwd() {
     emulate -L zsh
-    l -C
+    colorls -lA --sd -C
 }
 
 function tm-jbs() {
@@ -195,10 +195,12 @@ function tm-libbs() {
 }
 
 # Loads NVM and Node
-export NVM_DIR=~/.nvm
-export NODE_VERSION="v10.16.3"
+#export NVM_DIR=~/.nvm
+export NODE_VERSION="v14.15.4"
 export PATH="$HOME/.nvm/versions/node/$NODE_VERSION/bin:$PATH"
 #source $(brew --prefix nvm)/nvm.sh
+export NVM_DIR="$HOME/.nvm"
+. "$(brew --prefix nvm)/nvm.sh"
 
 # Load latest Ruby version
 export PATH="/usr/local/opt/ruby/bin:$PATH"

@@ -150,6 +150,7 @@ let g:move_key_modifier = 'C'
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <C-a> pumvisible() ? "\<C-y>" : "\<C-a>"
+let g:coc_global_extensions = ['coc-browser', 'coc-cspell-dicts', 'coc-dictionary', 'coc-emoji', 'coc-explorer', 'coc-imselect', 'coc-jest', 'coc-json', 'coc-prettier', 'coc-tag', 'coc-word', 'coc-json', 'coc-git', 'coc-eslint', 'coc-css', 'coc-emmet', 'coc-highlight', 'coc-html', 'coc-prisma', 'coc-sh', 'coc-snippets', 'coc-spell-checker', 'coc-svg', 'coc-swagger', 'coc-tabnine', 'coc-tsserver', 'coc-vetur', 'coc-yaml', 'coc-yank']
 " inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 " inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
